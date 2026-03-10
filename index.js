@@ -1,1 +1,1 @@
-import sequelize from './database/sequelize.js';
+import Usuario from "./model/usuario.js";
