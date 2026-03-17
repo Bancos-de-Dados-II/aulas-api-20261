@@ -1,22 +1,12 @@
-import Usuario from "./model/usuario.js";
+import express from 'express'
+const app = express()
+app.use(express.json())
+const port = 3000
 
-//CREATE
-//await Usuario.create({
-//    email:"maria@gmail.com",
-//    nome:"Maria"})
-//    .then(usuario=> 
-//            console.log("Usuário criado "+usuario))
-//    .catch(error => console.log("Erro ao criar"+error));
+import UsuarioRouter from './router/usuario-router.js';
 
-//READ
-//console.log(await Usuario.findAll());
+app.use('/usuarios', UsuarioRouter);
 
-//UPDATE
-//const usuario = await Usuario.findByPk('joao@gmail.com');
-//usuario.set({nome:"João da Silva"});
-//await usuario.save();
-
-//DELETE
-const usuario = await Usuario.findByPk('joao@gmail.com');
-//usuario.destroy();
-console.log(usuario);
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
