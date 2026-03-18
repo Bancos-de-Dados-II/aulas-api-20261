@@ -1,15 +1,13 @@
 import express from 'express';
 
-import { getUsuarios } from 
+import { getUsuarios, getUsuarioByEmail } from 
     '../controller/usuario-controller.js';
 
 const UsuarioRouter = express.Router();
 
 UsuarioRouter.get('/', getUsuarios);
+UsuarioRouter.get('/:email', getUsuarioByEmail);
 
-UsuarioRouter.get('/:id', (req,res)=>{
-    res.send('TODO: Listar usuário por id');
-});
 UsuarioRouter.post('/', (req,res)=>{
     res.send('TODO: Criar usuário');
 });
