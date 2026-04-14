@@ -27,6 +27,7 @@ const Usuario = sequelize.define('Usuario',{
     }
 });
 
-await Usuario.sync({force: true});
+//Roda com force:true só na primeira vez, depois remove
+await Usuario.sync();
 
 export default Usuario;
