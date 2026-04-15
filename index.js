@@ -6,7 +6,7 @@ const app = express()
 app.use(cors());
 app.use(express.json())
 
-const port = 3000
+const port = process.env.PORT || 4000;
 
 import UsuarioRouter from './router/usuario-router.js';
 
