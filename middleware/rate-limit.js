@@ -9,6 +9,7 @@ export async function rateLimit(req,res,next){
             EX: 60
         });
         next();
+        return;
     }
     //Limite de 10 requisições por minuto
     if(requests >= 10){
