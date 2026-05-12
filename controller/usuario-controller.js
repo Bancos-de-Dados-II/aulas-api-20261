@@ -10,9 +10,9 @@ export async function getUsuarios(req, res){
     }
 }
 
-export async function getUsuarioByEmail(req, res){
+export async function getUsuarioById(req, res){
     try{
-        const usuario = await Usuario.findByPk(req.params.email);
+        const usuario = await Usuario.findByPk(req.params.id);
         if(!usuario){
             res.status(404).json({error: 'Usuário não encontrado'});
             return;
@@ -34,7 +34,7 @@ export async function criarUsuario(req,res){
 
 export async function atualizarUsuario(req,res){
     try{
-        const usuario = await Usuario.findByPk(req.params.email);
+        const usuario = await Usuario.findByPk(req.params.id);
         if(!usuario){
             res.status(404).json({error: 'Usuário não encontrado'});
             return;
@@ -48,7 +48,7 @@ export async function atualizarUsuario(req,res){
 
 export async function deletarUsuario(req,res){
     try{
-        const usuario = await Usuario.findByPk(req.params.email);
+        const usuario = await Usuario.findByPk(req.params.id);
         if(!usuario){
             res.status(404).json({error: 'Usuário não encontrado'});
             return;

@@ -1,15 +1,15 @@
 import express from 'express';
 
-import { getUsuarios, getUsuarioByEmail, criarUsuario, atualizarUsuario,
+import { getUsuarios, getUsuarioById, criarUsuario, atualizarUsuario,
     deletarUsuario } from 
     '../controller/usuario-controller.js';
 
 const UsuarioRouter = express.Router();
 
 UsuarioRouter.get('/', getUsuarios);
-UsuarioRouter.get('/:email', getUsuarioByEmail);
+UsuarioRouter.get('/:id', getUsuarioById);
 UsuarioRouter.post('/', criarUsuario);
-UsuarioRouter.put('/:email', atualizarUsuario);
-UsuarioRouter.delete('/:email', deletarUsuario);
+UsuarioRouter.put('/:id', atualizarUsuario);
+UsuarioRouter.delete('/:id', deletarUsuario);
 
 export default UsuarioRouter;
