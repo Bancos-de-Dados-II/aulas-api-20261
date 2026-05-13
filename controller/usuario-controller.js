@@ -1,4 +1,5 @@
 import Usuario from '../model/usuario.js';
+import client from '../database/redis.js';
 
 export async function getUsuarios(req, res){
     try{
@@ -11,12 +12,24 @@ export async function getUsuarios(req, res){
 }
 
 export async function getUsuarioById(req, res){
+
+    const usuario = await client.get(req.params.id);
+    //Cache-hit
+    if(usuario){
+        res.json(JSON.parse(usuario));
+        return;
+    }
+
+    //Cache-miss
     try{
         const usuario = await Usuario.findByPk(req.params.id);
         if(!usuario){
             res.status(404).json({error: 'Usuário não encontrado'});
             return;
         }
+        await client.set(req.params.id, JSON.stringify(usuario),{
+            EX: 3600
+        });
         res.json(usuario);
     }catch(error){
         res.status(400).json({error: error.message});
