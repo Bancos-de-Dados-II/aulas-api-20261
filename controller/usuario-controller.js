@@ -52,6 +52,8 @@ export async function atualizarUsuario(req,res){
             res.status(404).json({error: 'Usuário não encontrado'});
             return;
         }
+        //Remove do cache
+        await client.del(req.params.id);
         await usuario.set(req.body).save();
         res.json(usuario);
     }catch(error){
@@ -66,6 +68,8 @@ export async function deletarUsuario(req,res){
             res.status(404).json({error: 'Usuário não encontrado'});
             return;
         }
+        //Remove do cache
+        await client.del(req.params.id);
         await usuario.destroy();
         res.json(usuario);
     }catch(error){
