@@ -32,6 +32,8 @@ Preencha as variáveis no `.env`:
 - `PG_USER`
 - `PG_PASSWORD`
 - `PG_DATABASE`
+- `PORT`
+- `REDIS_PASSWORD`
 
 Exemplo:
 
