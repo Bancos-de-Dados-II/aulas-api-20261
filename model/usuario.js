@@ -15,7 +15,10 @@ const usuarioSchema = new Schema({
             required: true
         }
     },
-    ativo: Boolean
+    ativo: {
+        type: Boolean,
+        default: true
+    }
 })
 
 usuarioSchema.index({localizacao: '2dsphere'});
