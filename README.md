@@ -144,4 +144,3 @@ DELETE /usuarios/:id
 - **redis**: Client para cache
 - **cors**: Middleware CORS
 - **dotenv**: Gerenciamento de variáveis de ambiente
-- **pg**: Client PostgreSQL (dependência transitória)
