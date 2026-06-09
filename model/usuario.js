@@ -1,33 +1,26 @@
-import sequelize from '../database/sequelize.js'
-import { DataTypes } from 'sequelize';
+import mongoose from '../database/mongoose.js';
+const {Schema} = mongoose;
 
-const Usuario = sequelize.define('Usuario',{
-    id: {
-        type: DataTypes.UUID,
-        primaryKey: true,
-        defaultValue: DataTypes.UUIDV4
+const usuarioSchema = new Schema({
+    email: String,
+    nome: String,
+    localizacao: {
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true
+        },
+        coordinates: {
+            type: [Number],
+            required: true
+        }
     },
-    email:{
-        type: DataTypes.STRING,
-        unique: true,
-        allowNull: false
-    },
-    nome:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    localizacao:{
-        type: DataTypes.GEOMETRY('POINT', 4326),
-        allowNull: false
-    },
-    ativo:{
-        type: DataTypes.BOOLEAN,
-        defaultValue: true,
-        allowNull: false
-    }
-});
+    ativo: Boolean
+})
 
-//Roda com force:true só na primeira vez, depois remove
-await Usuario.sync();
+usuarioSchema.index({localizacao: '2dsphere'});
+usuarioSchema.index({email: 1}, {unique: true});
+
+const Usuario = mongoose.model('Usuario', usuarioSchema);
 
 export default Usuario;
