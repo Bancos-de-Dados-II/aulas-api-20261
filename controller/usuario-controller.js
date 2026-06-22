@@ -1,5 +1,6 @@
 import Usuario from '../model/usuario.js';
 import client from '../database/redis.js';
+import driver from '../database/neo4j.js';
 
 export async function getUsuarios(req, res){
     try{
@@ -40,6 +41,12 @@ export async function criarUsuario(req,res){
     try{
         const usuario = new Usuario(req.body);
         await usuario.save();
+
+        await driver.executeQuery(
+            'MERGE (u:Usuario{email:$email})',
+            {email: usuario.email}
+        )
+
         res.status(201).json(usuario);
     }catch(error){
         res.status(400).json({error: error.message});
